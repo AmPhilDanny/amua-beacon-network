@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -n server,admin -c blue,green \"bun run server:dev\" \"bun run admin:dev\"",
-    "build": "bun run --cwd server build && bun run --cwd admin build",
+    "build": "bun run build:server && bun run build:admin",
+    "build:server": "tsc -p server/tsconfig.json",
+    "build:admin": "cd admin && vite build",
     "server:dev": "bun --watch server/index.ts",
     "admin:dev": "cd admin && bun vite --port 4000",
     "db:generate": "drizzle-kit generate",
